@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Firstname</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i=0; i < data.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= data[i].id %>
+                    </td>
+                    <td>
+                        <%= data[i].firstName %>
+                    </td>
+                    <td>
+                        <%= data[i].lastName %>
+                    </td>
+                    <td>
+                        <%= data[i].email %>
+                    </td>
+                    <td>
+                        <%= data[i].address %>
+                    </td>
+                    <td>
+                        <a href = "/detail/user/<%= data[i].id %>" target="_blank">Detail</a>
+                        <form action="/edit-user/<%= data[i].id %>" method="GET">
+
+                            <button type="submit">Edit</button>
+                        </form>
+                        <form action="/delete-user" method="POST">
+                            <input type="text" hidden value="<%= data[i].id %>" name="userId"/>
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+        
+    </table>
+    <form action="/create-new-user" method="POST">
+        <div class="create-new-user">
+        <div> CREATE-USER</div>
+        <div>
+            <label>FirstName:</label>
+            <input type="text" name="firstName">
+        </div>
+        <div>
+            <label>LastName:</label>
+            <input type="text" name="lastName">
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email">
+        </div>
+        <div>
+            <label>Address:</label>
+            <input type="text" name="address">
+        </div>
+        <input type="submit">
+    </div>
+    </form>
+</body>
+</html>
